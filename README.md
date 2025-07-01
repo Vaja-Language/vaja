@@ -160,11 +160,11 @@ func void main() {
 
 #### Logical
 
-| Operator | Meaning     |
-| -------- | ----------- |
-| `and`    | Logical AND |
-| `or`     | Logical OR  |
-| `!`      | Logical NOT |
+| Operator  | Meaning     |
+| --------  | ----------- |
+| `and`     | Logical AND |
+| `or`      | Logical OR  |
+| `!` `not` | Logical NOT |
 
 ---
 
