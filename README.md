@@ -266,6 +266,7 @@ Vaja is licensed under the GNU GPL v3.0. See [LICENSE](./LICENSE) for details.
 
 Pull requests, issues, and creative ideas are encouraged!
 See [RFP.md](./RFP.md) to get started.
+See https://github.com/Vaja-Language/vaja/discussions
 
 ---
 
