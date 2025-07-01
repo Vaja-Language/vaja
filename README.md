@@ -35,7 +35,7 @@ Vaja is not intended for production use, but rather as a playground for learning
 * **No arrays, structs, or user-defined types**
 * **No import/module system**
 * **No error handling/exception support**
-* **No pointers or direct memory access** => Priotary on the roadmap
+* **No pointers or direct memory access** => Prioritary on the roadmap
 * **Minimal standard library:** Only `print` and `readline`
 * **No operator overloading or generics**
 * **Only console applications (no GUI, no files)**
@@ -96,7 +96,7 @@ bool ok = true;
 ```
 
 * All variables must have a type and an initial value.
-* Use `<-` for assignment at declaration.
+* Use `=` for assignment at declaration.
 
 #### Assignment
 
