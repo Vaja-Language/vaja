@@ -27,10 +27,10 @@ Vaja programs use a standard library written in C# and compiled to a static libr
 ## 2. Standard Library Integration
 
 * **Library code:** C# (using NativeAOT for ahead-of-time compilation)
-* **Compile to:** Static library (`.a`), compatible with GCC
+* **Compile to:** Dynamic library (`.dll`), compatible with GCC
 * **Exports:** Functions using `[UnmanagedCallersOnly]` and appropriate P/Invoke-compatible signatures (e.g., `Cdecl` or `Stdcall`)
-* **Naming:** Output as `VajaStandardLib.a`
-* **Location:** Place in the same directory as your assembly output or provide a path to GCC via `-L/path/to/lib`
+* **Naming:** Output as `VajaStandardLib.dll`
+* **Location:** Placed in the same directory as the assembly output and provided to GCC via `-L/path/to/lib`
 
 ---
 
@@ -44,7 +44,7 @@ gcc yourfile.s -o yourprog.exe -L. -lVajaStandardLib -lkernel32
 
 * `yourfile.s` — GAS/AT\&T assembly source
 * `-L.` — look for libraries in current directory
-* `-lVajaStandardLib` — links against `VajaStandardLib.a`
+* `-lVajaStandardLib` — links against `VajaStandardLib.dll`
 * `-lkernel32` — links with Windows system library
 
 ---
@@ -78,9 +78,7 @@ gcc yourfile.s -o yourprog.exe -L. -lVajaStandardLib -lkernel32
 ## 6. Example Build Workflow
 
 **1. Generate assembly (`main.s`)**
-**2. Compile standard lib (C# → NativeAOT → `VajaStandardLib.a`)**
-
-**3. Build executable:**
+**2. Build executable:**
 
 ```sh
 gcc main.s -o main.exe -L. -lVajaStandardLib -lkernel32
@@ -127,24 +125,38 @@ gcc main.s -o main.exe -L. -lVajaStandardLib -lkernel32
 **main.s**
 
 ```asm
+.extern Readline # Import from VajaStandard library
+.extern Print # Import from VajaStandard library
+
+.section .data
+msg: .asciz "Hello"
+
 .section .text
 .global main
 main:
-    # Suppose rdi points to a string buffer
-    mov   rcx, mymsg       # Windows x64: RCX = first arg
-    call  Vaja_PrintString
-    ret
+    # Allocate shadow space (32 bytes) + stack alignment (Windows ABI)
+    subq $40, %rsp
 
-.section .data
-mymsg:
-    .asciz "Hello from Vaja!"
+    call Readline      # return: rax = sbyte* (char*)
+    movq %rax, %rcx    # 1st argument for Print (char* in RCX)
+
+    call Print         # Print(sbyte* str)
+    
+    leaq msg(%rip), %rcx # recommended way to put string as parameter in register   
+    call Print
+    addq $40, %rsp
+
+    xor %eax, %eax     # return 0
+    ret
 ```
+- https://forum.osdev.org/viewtopic.php?t=28775
+- https://cs.brown.edu/courses/cs033/docs/guides/x64_cheatsheet.pdf
 
 **VajaStandardLib C#:**
 
 ```csharp
 [UnmanagedCallersOnly(EntryPoint = "Vaja_PrintString", CallConvs = new[] { typeof(CallConvCdecl) })]
-public static void PrintString(byte* str)
+public static void Printng(byte* str)
 {
     Console.WriteLine(Marshal.PtrToStringAnsi((IntPtr)str));
 }
