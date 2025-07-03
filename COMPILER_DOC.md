@@ -155,8 +155,8 @@ main:
 **VajaStandardLib C#:**
 
 ```csharp
-[UnmanagedCallersOnly(EntryPoint = "Vaja_PrintString", CallConvs = new[] { typeof(CallConvCdecl) })]
-public static void Printng(byte* str)
+[UnmanagedCallersOnly(EntryPoint = "Print", CallConvs = new[] { typeof(CallConvCdecl) })]
+public static void Print(sbyte* str)
 {
     Console.WriteLine(Marshal.PtrToStringAnsi((IntPtr)str));
 }
