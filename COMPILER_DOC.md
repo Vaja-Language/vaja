@@ -70,7 +70,7 @@ gcc yourfile.s -o yourprog.exe -L. -lVajaStandardLib -lkernel32
 * Pass parameters according to x64 Windows calling convention (RCX, RDX, R8, R9 for the first four integer/pointer args).
 * **String encoding:**
 
-  * If calling from assembly and passing strings, use UTF-8 or ASCII-encoded null-terminated buffers (as C# can convert via `new string((sbyte*)ptr)` or `Marshal.PtrToStringAnsi`).
+  * If calling from assembly and passing strings, use UTF-8 or ASCII-encoded null-terminated buffers (as C# can convert via `new string((byte*)ptr)` or `Marshal.PtrToStringAnsi`).
   * Confirm the encoding/decoding scheme in your Vaja runtime.
 
 ---
@@ -137,10 +137,10 @@ main:
     # Allocate shadow space (32 bytes) + stack alignment (Windows ABI)
     subq $40, %rsp
 
-    call Readline      # return: rax = sbyte* (char*)
+    call Readline      # return: rax = byte* (char*)
     movq %rax, %rcx    # 1st argument for Print (char* in RCX)
 
-    call Print         # Print(sbyte* str)
+    call Print         # Print(byte* str)
     
     leaq msg(%rip), %rcx # recommended way to put string as parameter in register   
     call Print
@@ -156,7 +156,7 @@ main:
 
 ```csharp
 [UnmanagedCallersOnly(EntryPoint = "Print", CallConvs = new[] { typeof(CallConvCdecl) })]
-public static void Print(sbyte* str)
+public static void Print(byte* str)
 {
     Console.WriteLine(Marshal.PtrToStringAnsi((IntPtr)str));
 }
