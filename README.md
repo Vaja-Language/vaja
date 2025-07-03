@@ -253,6 +253,10 @@ Vaja is under active development. Planned future features include:
 * Debugging tools
 
 Contributions and feature requests are welcome! See [RFP.md](./RFP.md) for details.
+---
+
+## Compiler documentation
+[Compiler.md](./COMPILER_DOC.md)
 
 ---
 
