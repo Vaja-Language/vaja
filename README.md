@@ -1,4 +1,5 @@
-<img width="64" alt="ReadmeIcon_Vaja" src="https://github.com/user-attachments/assets/f9482278-c98f-4ab1-9e80-07d0a1cc7f76" />
+<!-- <img width="64" alt="ReadmeIcon_Vaja" src="https://github.com/user-attachments/assets/f9482278-c98f-4ab1-9e80-07d0a1cc7f76" /> -->
+![VajaLogo_v2_resized](https://github.com/user-attachments/assets/0dad4fcc-0098-4037-b206-1b2fa1cfe52c)
 # Vaja Programming Language
 
 > *A minimal, statically-typed, educational language that compiles to FASM — for fun, learning, and hacking!*
