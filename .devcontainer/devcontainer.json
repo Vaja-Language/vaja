@@ -3,7 +3,7 @@
 {
 	"name": "VajaCompiler Dev",
 	"build": {
-		"dockerfile": "Dockerfile",
+		"dockerfile": "../Dockerfile",
 		"context": ".."
 	},
 	"containerEnv": {
@@ -11,7 +11,7 @@
 	  },
 	"containerUser": "vscode",
 	"remoteUser": "vscode",
-	"postCreateCommand": "",
+	"postCreateCommand": "echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/workspace' >> ~/.bashrc",
 	"customizations": {
 		"vscode": {
 			"extensions": [
