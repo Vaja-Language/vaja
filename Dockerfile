@@ -1,5 +1,5 @@
 # Use an official Ubuntu LTS image as base
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 # Avoid interactive prompts during build
 ENV DEBIAN_FRONTEND=noninteractive
@@ -10,12 +10,7 @@ RUN apt-get update && \
     git curl wget nano vim \
     && rm -rf /var/lib/apt/lists/*
 
-# Set the work directory (optional)
-WORKDIR /workspace
-
-# Optionally: copy your VajaCompiler files in if you want them in the image
-COPY VajaCompiler /workspace
-COPY test.vaja /workspace
-
-# Default command (bash shell)
-CMD ["/bin/bash"]
+# Install .NET SDK
+RUN add-apt-repository ppa:dotnet/backports && \
+    apt-get update && \
+    apt-get install -y dotnet-sdk-9.0
