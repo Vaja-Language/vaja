@@ -2,10 +2,7 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/dotnet
 {
 	"name": "VajaCompiler Dev",
-	"build": {
-		"dockerfile": "../Dockerfile",
-		"context": ".."
-	},
+	"image": "ghcr.io/Vaja-Language/vajadev:latest",
 	"containerEnv": {
 		"HOME": "/home/vscode"
 	  },
