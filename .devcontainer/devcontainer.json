@@ -2,7 +2,7 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/dotnet
 {
 	"name": "VajaCompiler Dev",
-	"image": "ghcr.io/Vaja-Language/vajadev:latest",
+	"image": "ghcr.io/vaja-language/vajadev:latest",
 	"containerEnv": {
 		"HOME": "/home/vscode"
 	  },

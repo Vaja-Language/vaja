@@ -32,4 +32,4 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/Vaja-Language/vajadev:latest
+            ghcr.io/vaja-language/vajadev:latest
