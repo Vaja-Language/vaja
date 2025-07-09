@@ -2,7 +2,15 @@ name: Build and Publish Docker image
 
 on:
   push:
-    branches: [ main ] # or your desired branch
+    branches:
+      - main
+    paths:
+      - 'Dockerfile'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'Dockerfile'
 
 jobs:
   build-and-push:
